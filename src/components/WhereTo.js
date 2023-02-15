@@ -1,45 +1,29 @@
-import {React, useEffect} from "react";
-import { GeocoderAutocomplete } from '@geoapify/geocoder-autocomplete';
-import '@geoapify/geocoder-autocomplete/styles/minimal.css'
-
-const API_KEY = "33b4af2cef534bd6b626019b07159028";
-let initialised = false;
+import { React, useState, useEffect } from "react";
+import Search from "./Search";
+import { createClient } from 'pexels';
 
 function WhereTo(props) {
 
-    const setDestination = props.setDestination;
-
+    const [backgoundImage, setBackgoundImage] = useState("");
+    const API_KEY = "OVJEDExfeypBb1DqjkyDd3falp08tv5aCtvxRYFvMuuWxbv2DN8xSmyM";
+    const client = createClient(API_KEY);
+    
     useEffect(() => {
-
-        /*  
-         *  From React 18, useEffect runs twice in development environment - 
-         *  Could prevent this by disabling Strict mode in src/index.js, but 
-         *  preferring use of "initialised" conditional so development-only
-         *  checks are still performed in Strict mode
-        */                
-        if(!initialised) { const autocomplete = new GeocoderAutocomplete(
-                document.getElementById("autocomplete"), 
-                API_KEY, 
-                {
-                    type: "city",
-                    placeholder: "Make it somewhere nice...",
-                    debounceDelay: 250
-                });
-
-            autocomplete.on("select", (destination) => {
-                // check selected location here 
-                setDestination(destination);
+        client.photos.show({ id: 33622 })
+            .then(photo => {
+                console.log("photo", photo);
+                setBackgoundImage(photo.src.large2x);
             });
+      }, [client]);
 
-            autocomplete.on("suggestions", (suggestions) => {
-            // process suggestions here
-            });
-            initialised = true;
-        }
-    }, [setDestination]);
-      
     return (
-        <div id="autocomplete" className="relative autocomplete-container"></div>
+        <div className="w-screen flex justify-center justify-items-center">
+            <img className="absolute w-full" src={backgoundImage} alt="Evocative holiday scene"></img>            
+            <div className="max-w-[430px] w-full m-3 mt-3 pt-5 pb-5 z-10 bg-white">
+                <h1 className="relative font-extrabold text-[60px]">Where to?</h1>
+                <Search setDestination={props.setDestination}/>
+            </div>
+        </div>
     );
 }
 

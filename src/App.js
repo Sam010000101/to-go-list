@@ -14,12 +14,9 @@ function App() {
 
   return (
     <div className="App">
-      <h1 className="bg-red-400">
-        Lets see if this branch works
-      </h1>
       <h2>{destinationName}</h2>
       <WhereTo setDestination={setDestination}/>
-
+      {/* destinationData will be used to load data from the Geoapify Places API */}
     </div>
   );
 }
