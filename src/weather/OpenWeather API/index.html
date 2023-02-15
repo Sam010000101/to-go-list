@@ -29,12 +29,42 @@
      
 // API Call
 let queryUrl = "https://api.openweathermap.org/data/2.5/";
-let lat = "lat=16.5004°S";
-let lon = "lon=151.7415°W";
-let apiKey = "appid=6854c42697f6e8432ee1b6899886d347";
-let file = queryUrl + lat + let + apiKey;
+let lat = "16.5004";
+let lon = "151.7415";
+let apiKey = "6854c42697f6e8432ee1b6899886d347";
+let file = queryUrl + lat + lon + apiKey;
 
-    </script>
+fetch(file)
+ .then((response) => response.json())
+ .then((data) => (
+
+ console.log(data)
+
+ ));
+
+ // store apiKey
+
+ var apiKey = "6854c42697f6e8432ee1b6899886d347"
+
+ // on clicking the submit button, call the following function
+
+ $(buttonEl).on("click", function(event) {
+  event.preventDefault();
+ }
+
+ // store the city that the user inputs
+
+ var input = $("#search-input").val().trim();
+ console.log(input);
+
+ // store the URL for the Geocoder API
+
+ var geoURL = "http://api.openweathermap.org/geo/1.0/direct?q="
+   
+ 
+ </script>
 
   </body>
 </html>
+
+https://api.openweathermap.org/data/2.5/weather?lat=16.5004%C2%B0S&lon=151.7415%C2%B0W&appid=6854c42697f6e8432ee1b6899886d347
