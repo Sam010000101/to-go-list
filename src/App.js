@@ -1,4 +1,5 @@
 import './App.css';
+import WhereTo from "./components/WhereTo";
 
 function App() {
   return (
@@ -6,6 +7,8 @@ function App() {
       <h1 className="bg-red-400">
         Lets see if this branch works
       </h1>
+      <WhereTo />
+      
     </div>
   );
 }
