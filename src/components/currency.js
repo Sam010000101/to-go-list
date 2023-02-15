@@ -2,7 +2,7 @@ import React from "react";
 
 function Currency() {
     return (
-        <div className="container mx-auto bg-slate-400 h-36 rounded-xl">
+        <div id="currency" className="container mx-auto bg-slate-400 h-36 rounded-xl">
              <h1>Currency</h1>
         </div>
     )
