@@ -1,9 +1,26 @@
-import React from "react";
+import { React, useEffect } from "react";
+import { createClient } from 'pexels';
 
-function Jumbotron() {
+function Jumbotron(props) {
+
+    const API_KEY = "OVJEDExfeypBb1DqjkyDd3falp08tv5aCtvxRYFvMuuWxbv2DN8xSmyM";
+    const client = createClient(API_KEY);
+    const destinationName = props.destinationName;
+    const backgroundImage = props.backgroundImage;
+    const setBackgroundImage = props.setBackgroundImage;
+
+    useEffect(() => {        
+        client.photos.search({query: `${destinationName}`, orientation: "landscape", per_page: 1 })
+            .then(resp => {
+                setBackgroundImage(resp.photos[0].src.large2x);
+            });
+      }, [client, setBackgroundImage, destinationName]);
+
+
     return (
-        <div className="rounded-xl container mx-auto h-72 bg-slate-400">
-            <h1>Jumbotron</h1>
+        <div id="jumbotron" className="relative rounded-xl container mx-auto h-72 bg-slate-400 overflow-hidden">
+            <h1 className="absolute w-full font-extrabold text-[60px] text-[#fff]">Where to?</h1>      
+            <img className="object-cover min-h-[300px]" src={backgroundImage} alt="Evocative holiday scene"></img>
         </div>
     )
 }
