@@ -1,3 +1,13 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+@import url('https://fonts.googleapis.com/css2?family=Itim&display=swap&text=homeblgwrkaut');
+
+@font-face {
+    font-family: 'Itim';
+    font-style: normal;
+    font-weight: 400;
+    font-display: swap;
+    src: url(https://fonts.gstatic.com/l/font?kit=0nknC9ziJOYewAFKl87YXQmLwpuS4WnSQGlRI94o&skey=5906924f6c9ed948&v=v10) format('woff2');
+  }

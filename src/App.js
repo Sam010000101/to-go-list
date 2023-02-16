@@ -21,7 +21,7 @@ function App() {
   }
 
   return (
-    <div className="App">
+    <div className="App bg-[#add8e6]">
 
       {/* destinationData will be used to load data from the Geoapify Places API */}
 
