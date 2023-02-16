@@ -40,7 +40,7 @@ function Form(props) {
       
     return (
         <div className="rounded-xl container mx-auto h-36 bg-slate-400">
-            <div id="autocomplete" className="relative mt-5 w-full autocomplete-container"></div>
+            <div id="autocomplete" className="absolute top-20 w-full autocomplete-container"></div>
         </div>
     );
 }
