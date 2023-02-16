@@ -19,8 +19,8 @@ function Jumbotron(props) {
 
     return (
         <div id="jumbotron" className="relative rounded-xl container mx-auto h-72 bg-slate-400 overflow-hidden">
-            <h1 className="absolute w-full font-extrabold text-[60px] text-[#fff]">Where to?</h1>      
-            <img className="object-cover min-h-[300px]" src={backgroundImage} alt="Evocative holiday scene"></img>
+            <h1 className="absolute w-full font-extrabold text-[60px] text-black z-40">Where to?</h1>      
+            <div className="min-h-[300px] opacity-50 z-0 bg-center" style={{backgroundImage: `url(${backgroundImage})`}} alt="Evocative holiday scene"></div>
         </div>
     )
 }

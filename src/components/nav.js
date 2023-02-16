@@ -4,7 +4,7 @@ function Nav() {
     const [navbarOpen, setNavbarOpen] = React.useState(false);
   return (
     <div>
-      <nav className="relative w-full flex flex-wrap items-center justify-between px-2 py-3 bg-slate-400 mb-3">
+      <nav id="nav" className="relative w-full flex flex-wrap items-center justify-between px-2 py-3 bg-slate-400 mb-3">
         <div className="container px-4 mx-auto flex flex-wrap items-center justify-between">
           <div className="w-full relative flex justify-between md:w-auto md:static md:block md:justify-start">
             <a className="text-3xl md:text-2xl font-bold inline-block mr-4 py-2 whitespace-nowrap  text-white" href="#">To-Go-List</a>
@@ -35,7 +35,6 @@ function Nav() {
               <li className="nav-item">
                 <a className="px-3 py-2 flex items-center text-l  font-bold leading-snug text-white hover:underline decoration-4" href="#contact">Contact</a>
               </li>
-             
             </ul>
           </div>
         </div>
