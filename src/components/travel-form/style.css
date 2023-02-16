@@ -1,0 +1,4 @@
+.geoapify-close-button {
+    visibility: hidden;
+    pointer-events: none;
+}
