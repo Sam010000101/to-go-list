@@ -38,9 +38,7 @@ fetch(file)
  .then((response) => response.json())
  .then((data) => (
 
- console.log(data)
-
- ));
+ console.log(data.current.temp);
 
  // store apiKey
 
@@ -64,10 +62,33 @@ fetch(file)
  var geoURL = "http://api.openweathermap.org/geo/1.0/direct?q=" + input + "&limit=1&appid" + apiKey
    
  // get longitude and latitude from the Geocoder API
- 
+  $.ajax({
+    url: geoURL,
+    method: "GET"
+
+  }).then(function(responseWeather) {
+    console.log{responseWeather};
+
+    // city name
+
+    var cityName = responseWeather.city.name;
+    console.log(cityName)
+
+    // date
+
+    var dateToday = moment(responseWeather.list[0].dt_text).format("MMM, YYYY");
+    console.log(dateToday)
+  }
+  
+  )
+  })
  </script>
 
   </body>
 </html>
 
 https://api.openweathermap.org/data/2.5/weather?lat=16.5004%C2%B0S&lon=151.7415%C2%B0W&appid=6854c42697f6e8432ee1b6899886d347
+
+ ));
+
+ 
