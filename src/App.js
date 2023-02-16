@@ -27,8 +27,7 @@ function App() {
 
       <Nav />
       <div className="container my-8 mx-auto grid gap-4 grid-cols-1 w-11/12">
-      <Jumbotron destinationName={destinationData.properties.name} backgroundImage={backgoundImage} setBackgroundImage={setBackgoundImage}/>
-      <Form setDestination={setDestination}/>
+      <Jumbotron destinationName={destinationData.properties.name} setDestination={setDestination} backgroundImage={backgoundImage} setBackgroundImage={setBackgoundImage}/>
       <Schedule />
       <Main />
       <Contact />
