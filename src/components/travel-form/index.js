@@ -1,14 +1,14 @@
-import {React, useEffect} from "react";
+import {React, useEffect, useRef } from "react";
 import { GeocoderAutocomplete } from "@geoapify/geocoder-autocomplete";
 import "@geoapify/geocoder-autocomplete/styles/round-borders.css";
 import "./style.css";
 
-const API_KEY = "33b4af2cef534bd6b626019b07159028";
-let initialised = false;
-
 function Form(props) {
 
+    const API_KEY = "33b4af2cef534bd6b626019b07159028";
     const setDestination = props.setDestination;
+    // let initialised = false;
+    const initialised = useRef(false);
 
     useEffect(() => {
 
@@ -17,8 +17,9 @@ function Form(props) {
          *  Could prevent this by disabling Strict mode in src/index.js, but 
          *  preferring use of "initialised" conditional so development-only
          *  checks are still performed in Strict mode
-        */                
-        if(!initialised) { const autocomplete = new GeocoderAutocomplete(
+        */   
+
+        if(!initialised.current) { const autocomplete = new GeocoderAutocomplete(
                 document.getElementById("autocomplete"), 
                 API_KEY, 
                 {
@@ -34,7 +35,7 @@ function Form(props) {
             autocomplete.on("suggestions", (suggestions) => {
             // process suggestions here
             });
-            initialised = true;
+            initialised.current = true;
         }
     }, [setDestination]);
       
