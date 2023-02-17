@@ -1,7 +1,6 @@
 import {React, useEffect, useRef } from "react";
 import { GeocoderAutocomplete } from "@geoapify/geocoder-autocomplete";
 import "@geoapify/geocoder-autocomplete/styles/round-borders.css";
-import "./style.css";
 
 function Form(props) {
 
@@ -35,6 +34,7 @@ function Form(props) {
             autocomplete.on("suggestions", (suggestions) => {
             // process suggestions here
             });
+            
             initialised.current = true;
         }
     }, [setDestination]);

@@ -15,7 +15,9 @@ function Jumbotron(props) {
     useEffect(() => {        
         client.photos.search({query: `${destinationName}`, orientation: "landscape", per_page: 1 })
             .then(resp => {
-                setBackgroundImage(resp.photos[0].src.large2x);
+                if (resp.photos.length) {
+                    setBackgroundImage(resp.photos[0].src.large2x);
+                }
             });
       }, [client, setBackgroundImage, destinationName]);
 
