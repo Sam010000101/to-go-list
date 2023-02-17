@@ -1,6 +1,7 @@
 import React from "react";
 import Currency from "./currency";
 import Weather from "./weather";
+
 import Translator from "./translator";
 import Tips from "./tips";
 
