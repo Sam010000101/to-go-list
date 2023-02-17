@@ -10,11 +10,13 @@ function Attractions(props) {
     const setPlaces = props.setPlaces;
 
     useEffect(() => {
+        console.log("errorMessage", errorMessage);
+        // Is it performing a search after the field has been cleared?
         if (Object.hasOwn(destinationData.properties, "place_id")) {
             GeoapifyAPI.searchTerms(destinationData.properties.place_id)
                 .then(res => {
                     if (typeof res.data === "undefined" || !res.data.features.length) {
-                        throw new Error("No results found.");
+                        // throw new Error("No results found.");
                     }
                     if (res.status !== 200) {
                         throw new Error(res.statusText);

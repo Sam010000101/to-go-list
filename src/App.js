@@ -13,12 +13,20 @@ import Attractions from "./components/attractions";
 
 function App() {
   
-  const [destinationData, setDestinationData] = useState({properties: {name: "maldives"}});
+  const initialState = {properties: {name: "maldives"}};
+  const [destinationData, setDestinationData] = useState(initialState);
   const [backgoundImage, setBackgoundImage] = useState("");
   const [places, setPlaces] = useState([]);
 
   const setDestination = (data) => {
-    setDestinationData(data);
+    setDestinationData(data ? data : initialState);
+
+    if (data) {
+      setDestinationData(data);
+    } else {
+      setDestinationData(initialState);
+      setPlaces([]);
+    }
   }
 
   return (
