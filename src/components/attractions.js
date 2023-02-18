@@ -29,10 +29,9 @@ function Attractions(props) {
     }, [destinationData, setPlaces]);
 
     return (
-        <div id="attractions" className="rounded-xl container mx-auto bg-slate-400">
-            <h1>Attractions</h1>
+        <div id="attractions" className="rounded-xl container mx-auto">
             <p id="error">{errorMessage}</p>
-            <ul className="grid gap-4 grid-cols-2 p-3">
+            <ul className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
             {
                 places.map(place => <Attraction key={place.properties.place_id} {...place} />)
             }
