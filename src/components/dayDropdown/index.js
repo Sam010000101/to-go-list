@@ -7,72 +7,37 @@ function DayDropdown() {
       <Menu.Items className="inline mt-2">
         <Menu.Item>
           {({ active }) => (
-            <a
-              className={`mx-1 px-2 py-1 text-sm text-white rounded-sm bg-slate-400 ${active && 'bg-blue-500'}`}
-              href="/account-settings"
-            >
-             1
-            </a>
+          <button className={`mx-1 px-2 py-1 text-sm text-white rounded-sm bg-slate-400 ${active && 'bg-blue-500'}`}>1</button>
           )}
         </Menu.Item>
         <Menu.Item>
           {({ active }) => (
-            <a
-              className={`mx-1 px-2 py-1 text-sm text-white rounded-sm bg-slate-400 ${active && 'bg-blue-500'}`}
-              href="/account-settings"
-            >
-              2
-            </a>
+            <button className={`mx-1 px-2 py-1 text-sm text-white rounded-sm bg-slate-400 ${active && 'bg-blue-500'}`}>2</button>
           )}
         </Menu.Item>
         <Menu.Item>
           {({ active }) => (
-            <a
-              className={`mx-1 px-2 py-1 text-sm text-white rounded-sm bg-slate-400 ${active && 'bg-blue-500'}`}
-              href="/account-settings"
-            >
-              3
-            </a>
+            <button className={`mx-1 px-2 py-1 text-sm text-white rounded-sm bg-slate-400 ${active && 'bg-blue-500'}`}>3</button>
           )}
         </Menu.Item>
         <Menu.Item>
           {({ active }) => (
-            <a
-              className={`mx-1 px-2 py-1 text-sm text-white rounded-sm bg-slate-400 ${active && 'bg-blue-500'}`}
-              href="/account-settings"
-            >
-              4
-            </a>
+            <button className={`mx-1 px-2 py-1 text-sm text-white rounded-sm bg-slate-400 ${active && 'bg-blue-500'}`}>4</button>
           )}
         </Menu.Item>
         <Menu.Item>
           {({ active }) => (
-            <a
-              className={`mx-1 px-2 py-1 text-sm text-white rounded-sm bg-slate-400 ${active && 'bg-blue-500'}`}
-              href="/account-settings"
-            >
-              5
-            </a>
+            <button className={`mx-1 px-2 py-1 text-sm text-white rounded-sm bg-slate-400 ${active && 'bg-blue-500'}`}>5</button>
           )}
         </Menu.Item>
         <Menu.Item>
           {({ active }) => (
-            <a
-              className={`mx-1 px-2 py-1 text-sm text-white rounded-sm bg-slate-400 ${active && 'bg-blue-500'}`}
-              href="/account-settings"
-            >
-              6
-            </a>
+            <button className={`mx-1 px-2 py-1 text-sm text-white rounded-sm bg-slate-400 ${active && 'bg-blue-500'}`}>6</button>
           )}
         </Menu.Item>
         <Menu.Item>
           {({ active }) => (
-            <a
-              className={`mx-1 px-2 py-1 text-sm text-white rounded-sm bg-slate-400 ${active && 'bg-blue-500'}`}
-              href="/account-settings"
-            >
-              7
-            </a>
+           <button className={`mx-1 px-2 py-1 text-sm text-white rounded-sm bg-slate-400 ${active && 'bg-blue-500'}`}>7</button>
           )}
         </Menu.Item>
       </Menu.Items>
