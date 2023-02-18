@@ -11,7 +11,7 @@ function Attraction(props) {
                 <h2 className="text-lg font-semibold leading-6 mb-1">{place.name}</h2>
                 <p className="text-sm">{place.address_line2}</p>
             </div>
-            <DayDropdown />            
+            <DayDropdown formatted={place.formatted} />
         </li>        
     )
 }

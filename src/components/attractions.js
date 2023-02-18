@@ -6,16 +6,15 @@ function Attractions(props) {
 
     const destinationData = props.destinationData;
     const [errorMessage, setErrorMessage] = useState("");
-    const places = props.places;
-    const setPlaces = props.setPlaces;
+    const {places, setPlaces} = props;
 
     useEffect(() => {
-        console.log("errorMessage", errorMessage);
         // Is it performing a search after the field has been cleared?
         if (Object.hasOwn(destinationData.properties, "place_id")) {
             GeoapifyAPI.searchTerms(destinationData.properties.place_id)
                 .then(res => {
                     if (typeof res.data === "undefined" || !res.data.features.length) {
+                        // Disabled for purposes of MVP 
                         // throw new Error("No results found.");
                     }
                     if (res.status !== 200) {
@@ -26,7 +25,7 @@ function Attractions(props) {
                 .catch(err => setErrorMessage(err.message));
         }
 
-    }, [destinationData, setPlaces]);
+    }, [destinationData, setPlaces, setErrorMessage]);
 
     return (
         <div id="attractions" className="rounded-xl container mx-auto">
