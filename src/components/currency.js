@@ -1,11 +1,12 @@
 import React from "react";
 import DropdownBase from "./currencyDropdownBase";
 import DropdownExchange from "./currencyDropdownExchange";
+import CurrencyAPI from "./utils/APIs/CurrencyAPI";
 
 function Currency() {
     return (
         <div id="currency" className="container mx-auto bg-slate-400 h-36 rounded-xl">
-            <h1>Currency</h1>
+                        <h1 className="text-lg font-semibold leading-6">CURRENCY CONVERTOR</h1>
             <div className="flex flex-row justify-center pt-2">
                 <div className="w-1/3 mx-5">
                     <label
@@ -29,11 +30,11 @@ function Currency() {
                     <label
                         htmlFor="exchange-currency"
                         className="block text-sm font-medium text-gray-700  pb-2">
-                        <h3 class="text-left">Exchange Currency</h3>
+                        <h3 className="text-left">Exchange Currency</h3>
                     </label>
                     <div className="block text-sm font-medium text-gray-700 pb-1"><DropdownExchange></DropdownExchange></div>
                     <div className="pt-2" id="exchange-currency">
-                        <h3 class="text-left">Currency Appears Here</h3>
+                        <h3 className="text-left">Currency Appears Here</h3>
                     </div>
                 </div>
             </div>
