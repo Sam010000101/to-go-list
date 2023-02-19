@@ -2,24 +2,37 @@ import { Menu } from '@headlessui/react'
 
 function DayDropdown(props) {
 
-  const {formatted} = props;
+  const {place, places, setPlaces, itinerary, setItinerary} = props;
+  const {formatted, place_id} = place;
   const days = [];
   
   for (let i = 0; i < 7; i++) {
     days.push(
-      <Menu.Item>
+      <Menu.Item key={i} >
           {({ active }) => (
           <button onClick={(e) => {
             let errs = [];
             const numStr = e.target.textContent;
             if (numStr.length) {
-              const selector = `#day-${numStr}-text-area`;
-              const record = document.querySelector(selector);
-              if (record) {             
-                record.textContent = record.textContent.concat("\n", formatted);
-                return;
-              }
-              errs.push("Unable to read day record");
+              
+              setItinerary(() => {
+                // Replace entire state to execute useEffect with itinerary as dep
+                const itineraryUpdate = [...itinerary];
+                itineraryUpdate[i].push(formatted);
+                return itineraryUpdate;
+              });
+
+              const placesUpdate = [...places];
+              placesUpdate
+                .filter(place => {
+                  // Get the attraction we've just added
+                  return place_id === place.properties.place_id;
+                })
+                .map(place => {
+                  // Mark as selected so we can exclude from Attractions listing
+                  return place.properties.selected = true});
+              // Update places state
+              setPlaces(placesUpdate);
             } else {
               errs.push("Unable to read day number");
             }

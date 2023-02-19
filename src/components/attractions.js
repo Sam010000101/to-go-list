@@ -6,10 +6,10 @@ function Attractions(props) {
 
     const destinationData = props.destinationData;
     const [errorMessage, setErrorMessage] = useState("");
-    const {places, setPlaces} = props;
+    const {places, setPlaces, itinerary, setItinerary} = props;
 
     useEffect(() => {
-        // Is it performing a search after the field has been cleared?
+        // Make sure we've got a place_id to search for
         if (Object.hasOwn(destinationData.properties, "place_id")) {
             GeoapifyAPI.searchTerms(destinationData.properties.place_id)
                 .then(res => {
@@ -20,6 +20,7 @@ function Attractions(props) {
                     if (res.status !== 200) {
                         throw new Error(res.statusText);
                     }
+                    // Update places state
                     setPlaces(res.data.features);
                 })
                 .catch(err => setErrorMessage(err.message));
@@ -32,7 +33,11 @@ function Attractions(props) {
             <p id="error">{errorMessage}</p>
             <ul className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
             {
-                places.map(place => <Attraction key={place.properties.place_id} {...place} />)
+                places
+                    .filter(place => {
+                        // Exclude attractions that have already been added to itinerary
+                        return !place.properties.selected})
+                    .map(place => <Attraction key={place.properties.place_id} place={place} places={places} setPlaces={setPlaces} itinerary={itinerary} setItinerary={setItinerary} />)
             }
             </ul>
 
