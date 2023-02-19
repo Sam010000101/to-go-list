@@ -24,7 +24,7 @@ function DayDropdown(props) {
               errs.push("Unable to read day number");
             }
             console.log(...errs);
-          }} id={i} className={`mx-1 px-2 py-1 text-sm text-blue-500 rounded-sm bg-white ${active && 'bg-blue-500'}`}>{i + 1}</button>
+          }} id={i} className={`mx-1 px-2 py-1 text-sm text-blue-500 rounded-sm bg-white hover:bg-blue-100 ${active && 'bg-blue-500'}`}>{i + 1}</button>
           )}
         </Menu.Item>
     );            
