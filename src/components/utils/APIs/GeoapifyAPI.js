@@ -2,25 +2,7 @@ import axios from "axios";
 
 const GEOAPIFY_API_KEY = "33b4af2cef534bd6b626019b07159028";
 const categories = [
-  // "accommodation",
-  // "commercial.department_store",
-  // "commercial.outdoor_and_sport",
-  // "catering.restaurant",
-  // "catering.cafe",
-  // "catering.bar",    
-  // "catering.pub" ,   
-  // "catering.ice_cream",
-  "entertainment.culture",
-  // "entertainment.museum",
-  // "leisure.spa",
-  // "leisure.park" ,   
-  // "leisure.park.garden" ,    
-  // "leisure.park.nature_reserve",
-  // "natural",
-  // "rental.car",
-  // "rental.bicycle",
-  // "tourism",
-  // "adult.nightclub"
+  "tourism.attraction"
 ]; 
 
 // This uses the Places endpoint. We're accessing the autocomplete endpoint via the geocoder-autocomplete node library
