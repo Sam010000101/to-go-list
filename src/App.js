@@ -1,5 +1,5 @@
 
-import { React, useState } from "react";
+import { React, useState, useEffect } from "react";
 
 import './App.css';
 import Main from './components/main';
@@ -10,13 +10,13 @@ import Contact from './components/contact';
 import Nav from './components/nav';
 import Attractions from "./components/attractions";
 
-
 function App() {
   
   const initialState = {properties: {name: "maldives"}};
   const [destinationData, setDestinationData] = useState(initialState);
   const [backgoundImage, setBackgoundImage] = useState("");
   const [places, setPlaces] = useState([]);
+  const [itinerary, setItinerary] = useState([ [], [], [], [], [], [], [], ]);
 
   const setDestination = (data) => {
     setDestinationData(data ? data : initialState);
@@ -36,9 +36,9 @@ function App() {
 
       <Nav />
       <div className="container my-8 mx-auto grid gap-4 grid-cols-1 w-11/12">
-      <Jumbotron destinationName={destinationData.properties.name} setDestination={setDestination} backgroundImage={backgoundImage} setBackgroundImage={setBackgoundImage}/>
-      <Attractions destinationData={destinationData} places={places} setPlaces={setPlaces}/>
-      <Schedule />
+      <Jumbotron destinationName={destinationData.properties.name} setDestination={setDestination} backgroundImage={backgoundImage} setBackgroundImage={setBackgoundImage} />
+      <Attractions destinationData={destinationData} places={places} setPlaces={setPlaces} itinerary={itinerary} setItinerary={setItinerary} />
+      <Schedule itinerary={itinerary} />
       <Main />
       <Contact />
       </div>
