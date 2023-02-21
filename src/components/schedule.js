@@ -18,7 +18,7 @@ function Schedule(props) {
         if (numActivities) {
             // If current day has been assigned activities, add them to the list
             for (j; j < numActivities; j++) {
-                liItems.push(<li key={`activity${j}`}>{day[j]}</li>);
+                liItems.push(<li key={`activity${j}`} className="border-b border-slate-300 py-2">{day[j]}</li>);
             }
         }
         liItems.push(<ScheduleItemForm key={`activity${j + 1}`} day={i} itinerary={itinerary} setItinerary={setItinerary} />);

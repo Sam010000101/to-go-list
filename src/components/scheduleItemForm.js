@@ -1,4 +1,5 @@
 import { React, useState } from "react";
+import { HiPlusCircle } from 'react-icons/hi';
 
 function ScheduleItemForm(props) {
 
@@ -19,8 +20,8 @@ function ScheduleItemForm(props) {
 
     return (
         <form onSubmit={handleSubmit}>
-            <label>Add an activity
-                <input
+            <label className="block mt-3"><HiPlusCircle size="20px" className="inline -mt-1 text-blue-500 hover:text-blue-600"/> Add an activity
+                <input className="block w-full text-center"
                     type="text"
                     value={userItem}
                     onChange={(e) => setUserItem(e.target.value)}
