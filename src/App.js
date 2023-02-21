@@ -1,5 +1,5 @@
 
-import { React, useState, useEffect } from "react";
+import { React, useState } from "react";
 
 import './App.css';
 import Main from './components/main';
@@ -38,7 +38,7 @@ function App() {
       <div className="container my-8 mx-auto grid gap-4 grid-cols-1 w-11/12">
       <Jumbotron destinationName={destinationData.properties.name} setDestination={setDestination} backgroundImage={backgoundImage} setBackgroundImage={setBackgoundImage} />
       <Attractions destinationData={destinationData} places={places} setPlaces={setPlaces} itinerary={itinerary} setItinerary={setItinerary} />
-      <Schedule itinerary={itinerary} />
+      <Schedule itinerary={itinerary} setItinerary={setItinerary} />
       <Main />
       <Contact />
       </div>

@@ -1,8 +1,9 @@
 import React from "react";
+import ScheduleItemForm from "./scheduleItemForm";
 
 function Schedule(props) {
     
-    const {itinerary} = props;
+    const {itinerary, setItinerary} = props;
     // Array to store prepared jsx for each day
     const daysOut = [];
 
@@ -12,16 +13,15 @@ function Schedule(props) {
         let liItems = [];
         // Optimise for loop condition
         const numActivities = day.length;
-        
+        let j = 0; 
+
         if (numActivities) {
             // If current day has been assigned activities, add them to the list
-            for (let j = 0; j < numActivities; j++) {
+            for (j; j < numActivities; j++) {
                 liItems.push(<li key={`activity${j}`}>{day[j]}</li>);
             }
-        } else {
-            // Current day has no activities assigned - use fallback text
-            liItems = <li key={"activity0"}>Activities for Day {i + 1}...</li>;
         }
+        liItems.push(<ScheduleItemForm key={`activity${j + 1}`} day={i} itinerary={itinerary} setItinerary={setItinerary} />);
         
         daysOut.push(
             // Prepare jsx for entire day listing and store in daysOut array
