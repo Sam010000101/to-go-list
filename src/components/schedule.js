@@ -1,44 +1,66 @@
 import React from "react";
 import ScheduleItemForm from "./scheduleItemForm";
+import { HiMinusCircle } from 'react-icons/hi';
 
 function Schedule(props) {
     
     const {itinerary, setItinerary} = props;
-    // Array to store prepared jsx for each day
-    const daysOut = [];
 
-    // Iterate itnerary and build list of activities for each day
-    const days = itinerary.map((day, i) => {
-        // Build list of activities for current day
-        let liItems = [];
-        // Optimise for loop condition
-        const numActivities = day.length;
-        let j = 0; 
+    const removeItem = (dayIndex, activity_id) => {
 
-        if (numActivities) {
-            // If current day has been assigned activities, add them to the list
-            for (j; j < numActivities; j++) {
-                liItems.push(<li key={`activity${j}`} className="border-b border-slate-300 py-2">{day[j]}</li>);
+        setItinerary(prev => {
+            // Replace entire state to execute useEffect with itinerary as dep
+            const updatedDay = prev[dayIndex].filter(activity => {
+                return activity.id !== activity_id
+            });
+            const itineraryUpdate = [
+                ...prev
+            ];
+            itineraryUpdate[dayIndex] = updatedDay;
+            return itineraryUpdate;
+        });
+    }
+
+    const getDaysOut = () => {
+
+        // Iterate itinerary and build list of activities for each day
+        const daysOut = [];
+
+        const days = itinerary.map((day, i) => {
+            // Build list of activities for current day
+            let liItems = [];
+            // Optimise for loop condition
+            const numActivities = day.length;
+            let j = 0;
+
+            if (numActivities) {
+                // If current day has been assigned activities, add them to the list
+                for (j; j < numActivities; j++) {
+                    // console.log("array position will be", j - 1);
+                    const activity_id = day[j].id;
+                    liItems.push(<li key={`activity${j}`} className="border-b border-slate-300 py-2">{day[j].text} <button onClick={() => {removeItem(i, activity_id)}}><HiMinusCircle size="20px" className="inline -mt-1 text-slate-400 hover:text-slate-500"/></button></li>);
+                }
             }
-        }
-        liItems.push(<ScheduleItemForm key={`activity${j + 1}`} day={i} itinerary={itinerary} setItinerary={setItinerary} />);
-        
-        daysOut.push(
-            // Prepare jsx for entire day listing and store in daysOut array
-            <li className="flex pb-2" key={`day${i + 1}`} >
-                <div className="w-full">
-                    <span className="flex justify-center mx-1 my-1 gap-1 before:block before:absolute before:-inset-1 before:bg-gradient-to-r from-blue-500 to-blue-200 relative inline-block before:rounded-t-xl">
-                        <span className="relative text-white uppercase text-left">day {i + 1}</span>
-                    </span>
-                    <label className="relative block">
-                        <ul id="day-1-items" className="placeholder:italic placeholder:text-slate-400 block bg-white w-full border rounded-b-xl border-slate-300 py-2 pl-4 pr-3 shadow-sm focus:outline-none focus:border-white-500 focus:ring-inset ring-emerald-300 focus:ring-1 sm:text-sm resize-none" placeholder="Activities for Day 1..." type="text" name="search" rows="3">
-                            {liItems}
-                        </ul>
-                    </label>
-                </div>
-            </li>
-        );
-    });
+            liItems.push(<li key={`activity${j + 1}`} className="pt-1"><ScheduleItemForm day={i} itinerary={itinerary} setItinerary={setItinerary} /></li>);
+            daysOut.push(
+                // Prepare jsx for entire day listing and store in daysOut array
+                <li className="flex pb-2" key={`day${i + 1}`} >
+                    <div className="w-full">
+                        <span className="flex justify-center mx-1 my-1 gap-1 before:block before:absolute before:-inset-1 before:bg-gradient-to-r from-blue-500 to-blue-200 relative inline-block before:rounded-t-xl">
+                            <span className="relative text-white uppercase text-left">day {i + 1}</span>
+                        </span>
+                        <label className="relative block">
+                            <ul id="day-1-items" className="placeholder:italic placeholder:text-slate-400 block bg-white w-full border rounded-b-xl border-slate-300 py-2 pl-4 pr-3 shadow-sm focus:outline-none focus:border-white-500 focus:ring-inset ring-emerald-300 focus:ring-1 sm:text-sm resize-none" placeholder="Activities for Day 1..." type="text" name="search" rows="3">
+                                {liItems}
+                            </ul>
+                        </label>
+                    </div>
+                </li>
+            );
+        });
+
+        return daysOut;
+    }
 
     return (
 
@@ -54,7 +76,7 @@ function Schedule(props) {
 
             {/* Schedule blocks */}
             <div className="container mx-auto pt-2 pb-5">
-                {daysOut}
+                {getDaysOut()}
             </div>
         </div>
     );

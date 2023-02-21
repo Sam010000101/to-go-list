@@ -1,5 +1,6 @@
 import React from "react";
 import { Menu } from "@headlessui/react";
+import uniqid from 'uniqid';
 
 function DayDropdown(props) {
 
@@ -15,11 +16,16 @@ function DayDropdown(props) {
             let errs = [];
             const numStr = e.target.textContent;
             if (numStr.length) {
+
+              const activityId = uniqid();
               
               setItinerary(() => {
                 // Replace entire state to execute useEffect with itinerary as dep
                 const itineraryUpdate = [...itinerary];
-                itineraryUpdate[i].push(formatted);
+                itineraryUpdate[i].push({
+                  id: activityId,
+                  text:formatted
+                });
                 return itineraryUpdate;
               });
 
@@ -31,7 +37,7 @@ function DayDropdown(props) {
                 })
                 .map(place => {
                   // Mark as selected so we can exclude from Attractions listing
-                  return place.properties.selected = true});
+                  return place.properties.activityId = activityId});
               // Update places state
               setPlaces(placesUpdate);
             } else {
