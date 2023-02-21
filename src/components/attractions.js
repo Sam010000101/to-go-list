@@ -36,7 +36,7 @@ function Attractions(props) {
                 places
                     .filter(place => {
                         // Exclude attractions that have already been added to itinerary
-                        return !place.properties.selected})
+                        return !place.properties.activityId})
                     .map(place => <Attraction key={place.properties.place_id} place={place} places={places} setPlaces={setPlaces} itinerary={itinerary} setItinerary={setItinerary} />)
             }
             </ul>
