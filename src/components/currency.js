@@ -49,7 +49,6 @@ function Currency() {
 			<div className="heading relative uppercase text-center text-blue-200 font-bold leading-6">
 				<h1>Currency converter</h1>
 			</div>
-			// Container for currency amount, from and to conversion, converted amount i.e user inputs
 			<div className="container">
 				<div className="flex justify-left gap-2 ml-2">
 					<h3 className="text-white ">Amount</h3>
