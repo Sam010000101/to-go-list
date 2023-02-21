@@ -2,13 +2,13 @@
 import { React, useState } from "react";
 
 import './App.css';
-import Main from './components/main';
 import Schedule from './components/schedule';
 import Footer from './components/footer';
 import Jumbotron from './components/jumbotron';
 import Contact from './components/contact';
 import Nav from './components/nav';
 import Attractions from "./components/attractions";
+import Subsection from "./components/subsection";
 
 function App() {
   
@@ -35,11 +35,15 @@ function App() {
       {/* destinationData will be used to load data from the Geoapify Places API */}
 
       <Nav />
-      <div className="container my-8 mx-auto grid gap-4 grid-cols-1 w-11/12">
+      <div className="container mx-auto grid gap-4 grid-cols-1 w-11/12">
       <Jumbotron destinationName={destinationData.properties.name} setDestination={setDestination} backgroundImage={backgoundImage} setBackgroundImage={setBackgoundImage} />
-      <Attractions destinationData={destinationData} places={places} setPlaces={setPlaces} itinerary={itinerary} setItinerary={setItinerary} />
-      <Schedule itinerary={itinerary} setItinerary={setItinerary} />
-      <Main />
+      
+      <div className="container grid mx-auto grid-cols-1 md:grid-cols-2 gap-4 max-h-min">
+        <Attractions destinationData={destinationData} places={places} setPlaces={setPlaces} itinerary={itinerary} setItinerary={setItinerary} />
+        <Schedule itinerary={itinerary} setItinerary={setItinerary} />
+      </div>
+
+      <Subsection />
       <Contact />
       </div>
       <Footer />

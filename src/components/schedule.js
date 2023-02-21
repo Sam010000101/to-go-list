@@ -64,12 +64,12 @@ function Schedule(props) {
 
     return (
 
-        <div id="schedule" className="flex flex-col justify-center rounded-xl h-auto bg-white w-full container mx-auto pb-5">
+        <div id="schedule" className="rounded-xl container mx-auto overflow-scroll">
 
             {/* Module Header */}
-            <span className="flex h-12 pt-3 gap-2 flex justify-center mx-1 mt-2 before:block before:absolute before:-inset-1 before:bg-indigo-900 relative inline-block before:rounded-t-xl before:rounded-b">
-                <span className="relative text-blue-200 font-bold leading-6">ACTIVITY SCHEDULE</span>
-                <span className="absolute inset-y-0 flex flex-col pl-2 pt-1 relative">
+            <span className="pt-3 gap-2 flex justify-center mx-1 mt-2  bg-[#025] rounded-t-xl rounded-b h-12">
+                <span className="font-itim relative text-blue-200 font-bold leading-6">Activity Schedule</span>
+                <span className="inset-y-0 flex flex-col pl-2 pt-1 relative">
                     <svg className="h-5 w-5 pb-1 fill-slate-300" viewBox="0 0 31.982 31.982">	<path d="M3.952,23.15L0,31.955l8.767-3.992l0.018,0.019L3.938,23.13L3.952,23.15z M4.602,22.463L24.634,2.432l4.849,4.848 L9.45,27.312L4.602,22.463z M30.883,0.941c-2.104-1.963-4.488-0.156-4.488-0.156l4.851,4.843 C31.244,5.627,33.124,3.375,30.883,0.941z" /></svg>
                 </span>
             </span>

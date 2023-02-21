@@ -23,6 +23,71 @@ function Currency() {
 			})
 	}, [from]);
 
+
+// Calling the convert function whenever
+// a user switches the currency
+useEffect(() => {
+	setOptions(Object.keys(info));
+	convert();
+}, [info])
+	
+// Function to convert the currency
+function convert() {
+	var rate = info[to];
+	setOutput(input * rate);
+}
+
+// Function to switch between two currency
+function flip() {
+	var temp = from;
+	setFrom(to);
+	setTo(temp);
+}
+
+return (
+	<div className="container mx-auto h-auto rounded-xl" id="currency">
+
+	{/* code for the heading box */}
+	<span className="pt-3 gap-2 flex justify-center mx-1 mt-2  bg-[#025] rounded-t-xl rounded-b h-12">
+		<span className="font-itim relative text-blue-200 font-bold leading-6">Currency Converter</span>
+	</span>
+
+	<div className="container border rounded-b-xl border-slate-300 py-2">
+		<div className="flex justify-left gap-2 ml-2">
+		<h3 className="text-black ">Amount</h3>
+		<input type="text"
+			placeholder="Enter the amount"
+			onChange={(e) => setInput(e.target.value)} />
+        <button className="rounded-full bg-blue-200 px-2 text-indigo-900" onClick={()=>{convert()}}>Convert</button>
+		</div>
+        <div className="flex justify-center gap-4 py-2 text-black">
+		<div className="middle flex">
+		<h3>From</h3>
+		<Dropdown options={options}
+					onChange={(e) => { setFrom(e.value) }}
+		value={from} placeholder="From" />
+		</div>
+		<div className="switch">
+		<HiSwitchHorizontal size="30px"
+						onClick={() => { flip()}}/>
+		</div>
+        <div className="right flex">
+		<h3>To</h3>
+		<Dropdown options={options}
+					onChange={(e) => {setTo(e.value)}}
+		value={to} placeholder="To" />
+		</div>
+	</div>
+	<div className="result flex justify-center text-black pt-2">
+		<h2 className="pl-2">Converted Amount:</h2>
+		<p className="pl-2"><b>{input+" "+from+" = "+output.toFixed(2) + " " + to}</b></p>
+
+	</div>
+	</div>
+            </div>
+);
+}
+
 	// Calling the convert function whenever
 	// a user switches the currency
 	useEffect(() => {
