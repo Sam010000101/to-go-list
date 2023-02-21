@@ -43,7 +43,7 @@ function App() {
         <Schedule itinerary={itinerary} setItinerary={setItinerary} />
       </div>
 
-      <Subsection />
+      <Subsection destinationData={destinationData}/>
       <Contact />
       </div>
       <Footer />
