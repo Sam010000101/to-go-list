@@ -15,8 +15,8 @@ npm i
 
 ### Node Libraries
 - geocoder-autocomplete - for searching destinations with autocomplete
-- react heroicons - for add/remove buttons and currency converion arrows
-- react headlessuiheadlessui - for dropdown that was adapted for ‘Go on day’
+- react heroicons - for add/remove buttons and currency conversion arrows
+- react headlessui - for dropdown that was adapted for ‘Go on day’
 - chart.js for weather chart
 - react-chartjs-2 for chart.js react integration
 - pexels for image api
