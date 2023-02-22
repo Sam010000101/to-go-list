@@ -2,7 +2,7 @@
 
 ## Description
 
-The To-Go-List is a travel dashboard which allows to create a travel itinery for a given destination, access travel recommendations which can be dynamically added to the itinary, information about the weather across the year and current exchange rates. It is mobile-friendly and saves the itinary in local storage. Users can send questions to the developer via a contact form at the bottom of the page. 
+The To-Go-List is a travel dashboard which allows to create a travel itinerary for a given destination, access travel recommendations which can be dynamically added to the itinerary, information about the weather across the year and current exchange rates. The website has a responsive design which adapts for use on different screens. Users can send questions to the developer via a contact form at the bottom of the page. 
 
 ## Installation
 
