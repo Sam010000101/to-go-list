@@ -34,7 +34,7 @@ function Attractions(props) {
                 <span className="font-itim relative text-blue-200 font-bold leading-6">Places to Go</span>
             </span>
             <p id="error">{errorMessage}</p>
-            <ul className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3 pt-2 pb-5">
+            <ul className="grid gap-4 sm:grid-cols-2 pt-2 pb-5">
             {
                 places
                     .filter(place => {
