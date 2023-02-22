@@ -6,7 +6,6 @@ function Form(props) {
 
     const API_KEY = "33b4af2cef534bd6b626019b07159028";
     const setDestination = props.setDestination;
-    // let initialised = false;
     const initialised = useRef(false);
 
     useEffect(() => {
@@ -27,7 +26,7 @@ function Form(props) {
                 });
 
             autocomplete.on("select", (destination) => {
-                // Update destination 
+                // Update destination
                 setDestination(destination);
             });
 
