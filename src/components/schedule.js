@@ -3,8 +3,8 @@ import ScheduleItemForm from "./scheduleItemForm";
 import { HiMinusCircle } from 'react-icons/hi';
 
 function Schedule(props) {
-    
-    const {itinerary, setItinerary} = props;
+
+    const { itinerary, setItinerary } = props;
 
     const removeItem = (dayIndex, activity_id) => {
 
@@ -26,7 +26,7 @@ function Schedule(props) {
         // Iterate itinerary and build list of activities for each day
         const daysOut = [];
 
-        const days = itinerary.map((day, i) => {
+        itinerary.forEach((day, i) => {
             // Build list of activities for current day
             let liItems = [];
             // Optimise for loop condition
@@ -38,7 +38,7 @@ function Schedule(props) {
                 for (j; j < numActivities; j++) {
                     // console.log("array position will be", j - 1);
                     const activity_id = day[j].id;
-                    liItems.push(<li key={`activity${j}`} className="border-b border-slate-300 py-2">{day[j].text} <button onClick={() => {removeItem(i, activity_id)}}><HiMinusCircle size="20px" className="inline -mt-1 text-slate-400 hover:text-slate-500"/></button></li>);
+                    liItems.push(<li key={`activity${j}`} className="border-b border-slate-300 py-2">{day[j].text} <button onClick={() => { removeItem(i, activity_id) }}><HiMinusCircle size="20px" className="inline -mt-1 text-slate-400 hover:text-slate-500" /></button></li>);
                 }
             }
             liItems.push(<li key={`activity${j + 1}`} className="pt-1"><ScheduleItemForm day={i} itinerary={itinerary} setItinerary={setItinerary} /></li>);
@@ -57,6 +57,7 @@ function Schedule(props) {
                     </div>
                 </li>
             );
+
         });
 
         return daysOut;
