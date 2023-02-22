@@ -117,7 +117,6 @@ function Weather(props) {
         }
     }, [destinationData, chartOptions, currLocation, lat, lon, name]);
 
-    console.log("Weather");
     return (
         <div className={Object.hasOwn(destinationData.properties, "lat") ? "group loaded" : "group"}>
             <div className="pt-3 gap-2 flex justify-center mx-1 mt-2  bg-[#025] rounded-t-xl rounded-b w-full h-[48px]">
