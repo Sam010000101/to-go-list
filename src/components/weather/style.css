@@ -1,0 +1,61 @@
+/* Chart.js parent element needs relative values for responsiveness - https://www.chartjs.org/docs/latest/configuration/responsive.html */
+
+#weather-chart {
+    width: 93vw;
+    height: 155px;
+}
+
+@media (min-width: 640px) {
+    #weather-chart {
+        width: 93vw;
+    }
+}
+
+@media (min-width: 703px) {
+    #weather-chart {
+        width: 650px;
+    }
+}
+
+@media (min-width: 768px) {
+    #weather-chart {
+        width: 45vw;
+    }
+}
+
+@media (min-width: 845px) {
+    #weather-chart {
+        width: 380px;
+    }
+}
+
+@media (min-width: 1024px) {
+    #weather-chart {
+        width: 45.5vw;
+    }
+}
+
+@media (min-width: 1120px) {
+    #weather-chart {
+        width: 507px;
+    }
+}
+
+@media (min-width: 1280px) {
+    #weather-chart {
+        width: 46vw;
+    }
+}
+
+@media (min-width: 1400px) {
+    #weather-chart {
+        width: 645px;
+    }
+}
+
+@media (min-width: 1536px) {
+    #weather-chart {
+        width: 46vw;
+        max-width: 770px;
+    }
+}
