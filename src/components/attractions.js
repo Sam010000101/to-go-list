@@ -38,7 +38,7 @@ function Attractions(props) {
             <div className="block group-[.loaded]:hidden mt-2 xl:mt-5 text-slate-400 text-center px lg:px-24 xl:px-24 2xl:px-52">
                 <p>Enter your destination in the search bar above and we'll suggest some places to go</p>
             </div>
-            <ul className="grid gap-4 sm:grid-cols-2 pt-2 pb-5">
+            <ul className="grid gap-4 lg:grid-cols-2 pt-2 pb-5">
             {
                 places
                     .filter(place => {
