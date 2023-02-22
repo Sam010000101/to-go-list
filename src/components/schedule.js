@@ -46,7 +46,7 @@ function Schedule(props) {
                 // Prepare jsx for entire day listing and store in daysOut array
                 <li className="flex pb-2" key={`day${i + 1}`} >
                     <div className="w-full">
-                        <span className="flex justify-center mx-1 my-1 gap-1 before:block before:absolute before:-inset-1 before:bg-gradient-to-r from-blue-500 to-blue-200 relative inline-block before:rounded-t-xl">
+                        <span className="flex justify-center mx-1 my-1 gap-1 before:block before:absolute before:-inset-1 before:bg-gradient-to-r from-blue-500 to-blue-200 relative before:rounded-t-xl">
                             <span className="relative text-white uppercase text-left">day {i + 1}</span>
                         </span>
                         <label className="relative block">
