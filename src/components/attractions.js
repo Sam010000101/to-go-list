@@ -29,11 +29,14 @@ function Attractions(props) {
     }, [destinationData, setPlaces, setErrorMessage]);
 
     return (
-        <div id="attractions" className="rounded-xl container mx-auto overflow-scroll">
+        <div id="attractions" className={Object.hasOwn(destinationData.properties, "lat") ? "group loaded rounded-xl container mx-auto overflow-scroll" : "group rounded-xl container mx-auto overflow-scroll"} >
               <span className="pt-3 gap-2 flex justify-center mx-1 mt-2  bg-[#025] rounded-t-xl rounded-b h-12">
                 <span className="font-itim relative text-blue-200 font-bold leading-6">Places to Go</span>
             </span>
             <p id="error">{errorMessage}</p>
+            <div className="block group-[.loaded]:hidden mt-2 xl:mt-5 text-slate-400 text-center px lg:px-24 xl:px-24 2xl:px-52">
+                        <p>Enter your destination in the search bar above and we'll suggest some places to go</p>
+                    </div>
             <ul className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3 pt-2 pb-5">
             {
                 places
