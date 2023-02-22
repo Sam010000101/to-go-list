@@ -27,12 +27,6 @@ function Nav() {
                 <a className=" hover:text-yellow-300 px-3 py-2 flex items-center text-l font-itim lowercase text-xl leading-snug text-[#add8e6] hover:underline decoration-wavy decoration-3" href="#weather">Weather</a>
               </li>
               <li className="nav-item">
-                <a className=" hover:text-yellow-300 px-3 py-2 flex items-center text-l font-itim lowercase text-xl leading-snug text-[#add8e6] hover:underline decoration-wavy decoration-3" href="#translator">Translator</a>
-              </li>
-              <li className="nav-item">
-                <a className=" hover:text-yellow-300 px-3 py-2 flex items-center text-l font-itim lowercase text-xl leading-snug text-[#add8e6] hover:underline decoration-wavy decoration-3" href="#tips">Tips</a>
-              </li>
-              <li className="nav-item">
                 <a className=" hover:text-yellow-300 px-3 py-2 flex items-center text-l font-itim lowercase text-xl leading-snug text-[#add8e6] hover:underline decoration-wavy decoration-3" href="#contact">Contact</a>
               </li>
             </ul>
