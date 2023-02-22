@@ -52,17 +52,16 @@ return (
 		<span className="font-itim relative text-blue-200 font-bold leading-6">Currency Converter</span>
 	</span>
 
-	<div className="container border rounded-b-xl border-slate-300 py-2">
+	<div className="container py-2">
 		<div className="flex justify-left gap-2 ml-2">
 		<h3 className="text-black ">Amount</h3>
 		<input type="text"
 			placeholder="Enter the amount"
 			onChange={(e) => setInput(e.target.value)} />
-        <button className="rounded-full bg-blue-200 px-2 text-indigo-900" onClick={()=>{convert()}}>Convert</button>
 		</div>
         <div className="flex justify-center gap-4 py-2 text-black">
 		<div className="middle flex">
-		<h3>From</h3>
+		<h3 className='mr-2'>From</h3>
 		<Dropdown options={options}
 					onChange={(e) => { setFrom(e.value) }}
 		value={from} placeholder="From" />
@@ -72,11 +71,12 @@ return (
 						onClick={() => { flip()}}/>
 		</div>
         <div className="right flex">
-		<h3>To</h3>
+		<h3 className='mr-2'>To</h3>
 		<Dropdown options={options}
 					onChange={(e) => {setTo(e.value)}}
 		value={to} placeholder="To" />
 		</div>
+		<button className="rounded-full bg-[#025] px-2 font-itim hover:text-yellow-300 hover:underline decoration-wavy decoration-3 text-blue-200" onClick={()=>{convert()}}>Convert</button>
 	</div>
 	<div className="result flex justify-center text-black pt-2">
 		<h2 className="pl-2">Converted Amount:</h2>
@@ -86,29 +86,6 @@ return (
 	</div>
             </div>
 );
-
-
-	// Calling the convert function whenever
-	// a user switches the currency
-	useEffect(() => {
-		setOptions(Object.keys(info));
-		convert();
-	}, [info])
-
-	// Function to convert the currency
-	function convert() {
-		var rate = info[to];
-		setOutput(input * rate);
-	}
-
-	// Function to switch between two currencies
-	function flip() {
-		var temp = from;
-		setFrom(to);
-		setTo(temp);
-	}
-
-	
 }
 
 export default Currency;
