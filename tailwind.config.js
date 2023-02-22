@@ -5,6 +5,10 @@ module.exports = {
     extend: {
       fontFamily: {
       itim: ['Itim','sans-serif']
+    },
+    colors: {
+      'precipitation': '#35a2eb',
+      'temperature': '#ff6384'
     }
   },
   },

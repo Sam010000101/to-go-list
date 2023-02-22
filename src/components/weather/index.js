@@ -20,8 +20,7 @@ function Weather(props) {
         borderWidth: 2,
         plugins: {
             legend: {
-                align: "center",
-                position: "top",
+                display: false
             },
             title: {
                 display: false,
@@ -116,8 +115,6 @@ function Weather(props) {
        
     }, [destinationData, chartOptions]);
 
-    // console.count("weather called");
-
     return (
         <div className={Object.hasOwn(destinationData.properties, "lat") ? "group loaded" : "group"}>
             <div className="pt-3 gap-2 flex justify-center mx-1 mt-2  bg-[#025] rounded-t-xl rounded-b w-full h-[48px]">
@@ -128,6 +125,11 @@ function Weather(props) {
                     <div className="block group-[.loaded]:hidden mt-2 xl:mt-5 text-slate-400 text-center px-10 lg:px-24 xl:px-36 2xl:px-52">
                         <p>Our weather data covers the entirety of the last year and will help you make an informed decision about the best time for your trip</p>
                     </div>
+
+                    <ul className="hidden group-[.loaded]:block text-[12px] text-slate-700" id="weather-chart-key">
+                        <li className="inline-block mr-4" id="chart-temperature"><span className="text-[22px] inline-block relative top-[2px] mr-1 text-temperature">&mdash; </span>Mean temperature</li>
+                        <li className="inline-block" id="chart-precipitation"><span className="text-[22px] inline-block relative top-[2px] mr-1 text-precipitation">&mdash; </span>Precipitation</li>
+                    </ul>
                             
                     <div className="relative hidden group-[.loaded]:block" id="weather-chart">
                         <Line options={chartOptions} data={weatherData} />
