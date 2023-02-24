@@ -19,13 +19,13 @@ npm i
 - react headlessui - for dropdown that was adapted for ‘Go on day’
 - chart.js for weather chart
 - react-chartjs-2 for chart.js react integration
-- pexels for image api
 - uniqid for managing itinerary items
 
 ### API's
 - Geoappify api for attraction data
 - OpenMeteo api for annual weather data
-- Currency api
+- Pixabay API for images
+- Currency API for currency conversion
 
 ### Packages
 - Tailwind CSS
