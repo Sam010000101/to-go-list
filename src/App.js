@@ -35,16 +35,15 @@ function App() {
       {/* destinationData will be used to load data from the Geoapify Places API */}
 
       <Nav />
-      <div className="container mx-auto grid gap-4 grid-cols-1 w-11/12">
       <Jumbotron destinationName={destinationData.properties.name} setDestination={setDestination} backgroundImage={backgoundImage} setBackgroundImage={setBackgoundImage} />
-      
-      <div className="container grid mx-auto grid-cols-1 md:grid-cols-2 gap-4 max-h-min">
-        <Attractions destinationData={destinationData} places={places} setPlaces={setPlaces} itinerary={itinerary} setItinerary={setItinerary} />
-        <Schedule itinerary={itinerary} setItinerary={setItinerary} />
-      </div>
+      <div className="container mx-auto grid gap-4 grid-cols-1 w-11/12">      
+        <div className="container grid mx-auto grid-cols-1 md:grid-cols-2 gap-4 max-h-min">
+          <Attractions destinationData={destinationData} places={places} setPlaces={setPlaces} itinerary={itinerary} setItinerary={setItinerary} />
+          <Schedule itinerary={itinerary} setItinerary={setItinerary} />
+        </div>
 
-      <Subsection destinationData={destinationData}/>
-      <Contact />
+        <Subsection destinationData={destinationData}/>
+        <Contact />
       </div>
       <Footer />
 
