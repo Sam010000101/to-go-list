@@ -29,7 +29,7 @@ function Attractions({destinationData, places, setPlaces, itinerary, setItinerar
                 .catch(err => setErrorMessage(err.message));
         }
 
-    }, [destinationData, setPlaces, setErrorMessage]);
+    }, [destinationData, setPlaces, setErrorMessage, scrollToListings]);
 
     return (
         <div id="attractions" className={Object.hasOwn(destinationData.properties, "lat") ? "group loaded rounded-xl container mx-auto overflow-scroll" : "group rounded-xl container mx-auto overflow-scroll"} >
