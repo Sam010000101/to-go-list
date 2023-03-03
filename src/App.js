@@ -12,7 +12,7 @@ import Subsection from "./components/subsection";
 
 function App() {
   
-  const initialState = {properties: {name: "maldives"}};
+  const initialState = {properties: {name: "polynesia"}};
   const [destinationData, setDestinationData] = useState(initialState);
   const [backgoundImage, setBackgoundImage] = useState("");
   const [places, setPlaces] = useState([]);

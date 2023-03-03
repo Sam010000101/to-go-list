@@ -26,7 +26,7 @@ function Jumbotron(props) {
                 <h1 className="font-itim text-[60px] text-white text-center z-40">Where to?</h1>
                 <Form setDestination={setDestination}/>
             </div>
-            <div className="w-full h-screen bg-center bg-cover " style={{backgroundImage: `url(${backgroundImage})`}} alt="Evocative holiday scene"></div>
+            <div className="w-full h-screen bg-center bg-cover bg-[#025]" style={{backgroundImage: `linear-gradient(to top, transparent 40vh, #025), url(${backgroundImage})`}} id="main-image" alt="Evocative holiday scene"></div>
         </div>
     )
 }
