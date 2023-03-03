@@ -20,7 +20,8 @@ function Attractions({destinationData, places, setPlaces, itinerary, setItinerar
                     }
                     // Update places state
                     setPlaces(res.data.features);
-                    console.log("num features:", res.data.features.length);
+
+                    // Scroll to any listings when loaded
                     if (res.data.features.length) {
                         scrollToListings.current.scrollIntoView({ behavior: 'smooth' });
                     }

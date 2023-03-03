@@ -2,9 +2,7 @@ import React from "react";
 import ScheduleItemForm from "./scheduleItemForm";
 import { HiMinusCircle } from 'react-icons/hi';
 
-function Schedule(props) {
-
-    const { itinerary, setItinerary } = props;
+function Schedule({ itinerary, setItinerary }) {
 
     const removeItem = (dayIndex, activity_id) => {
 

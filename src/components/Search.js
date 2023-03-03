@@ -5,9 +5,7 @@ import '@geoapify/geocoder-autocomplete/styles/minimal.css'
 const API_KEY = "33b4af2cef534bd6b626019b07159028";
 let initialised = false;
 
-function Search(props) {
-
-    const setDestination = props.setDestination;
+function Search({ setDestination }) {
 
     useEffect(() => {
 
