@@ -1,4 +1,4 @@
-import { React, useState, useEffect } from "react";
+import { React, useState, useEffect, useRef } from "react";
 import GeoapifyAPI from "./utils/APIs/GeoapifyAPI";
 import Attraction from "./attraction";
 
@@ -7,6 +7,7 @@ function Attractions(props) {
     const destinationData = props.destinationData;
     const [errorMessage, setErrorMessage] = useState("");
     const {places, setPlaces, itinerary, setItinerary} = props;
+    const scrollToAttractions = useRef();
 
     useEffect(() => {
         // Make sure we've got a place_id to search for
@@ -22,6 +23,10 @@ function Attractions(props) {
                     }
                     // Update places state
                     setPlaces(res.data.features);
+                    console.log("num features:", res.data.features.length);
+                    if (res.data.features.length) {
+                        scrollToAttractions.current.scrollIntoView({ behavior: 'smooth' });
+                    }
                 })
                 .catch(err => setErrorMessage(err.message));
         }
@@ -29,7 +34,7 @@ function Attractions(props) {
     }, [destinationData, setPlaces, setErrorMessage]);
 
     return (
-        <div id="attractions" className={Object.hasOwn(destinationData.properties, "lat") ? "group loaded rounded-xl container mx-auto overflow-scroll" : "group rounded-xl container mx-auto overflow-scroll"} >
+        <div ref={scrollToAttractions} id="attractions" className={Object.hasOwn(destinationData.properties, "lat") ? "group loaded rounded-xl container mx-auto overflow-scroll" : "group rounded-xl container mx-auto overflow-scroll"} >
               <span className="pt-3 gap-2 flex justify-center mx-1 mt-2  bg-[#025] rounded-t-xl rounded-b h-12">
                 <span className="font-itim relative text-blue-200 font-bold leading-6">Places to Go</span>
             </span>
