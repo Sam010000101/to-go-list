@@ -3,7 +3,7 @@ import PixabayAPI from "../utils/APIs/PixabayAPI";
 import Form from "../travel-form";
 import "./style.css";
 
-function Jumbotron({scrollToSearch, destinationName, backgroundImage, setBackgroundImage, setDestination}) {
+function Jumbotron({destinationName, backgroundImage, setBackgroundImage, setDestination}) {
 
     useEffect(() => {
         PixabayAPI.searchTerms(destinationName)
@@ -16,7 +16,7 @@ function Jumbotron({scrollToSearch, destinationName, backgroundImage, setBackgro
 
 
     return (
-        <div ref={scrollToSearch} id="jumbotron" className="relative top-0 w-full h-screen bg-slate-400 overflow-hidden">
+        <div id="jumbotron" className="relative top-0 w-full h-screen bg-slate-400 overflow-hidden">
             <div className="absolute top-12 w-full">
                 <h1 className="font-itim text-[60px] text-white text-center z-40">Where to?</h1>
                 <Form setDestination={setDestination}/>
