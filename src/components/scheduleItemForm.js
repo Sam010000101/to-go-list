@@ -2,9 +2,8 @@ import { React, useState } from "react";
 import { HiPlusCircle } from 'react-icons/hi';
 import uniqid from 'uniqid';
 
-function ScheduleItemForm(props) {
+function ScheduleItemForm({ day, itinerary, setItinerary }) {
 
-    const { day, itinerary, setItinerary } = props;
     const [userItem, setUserItem] = useState({text: "", id: ""});
 
     function handleSubmit(e) {

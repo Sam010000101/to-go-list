@@ -2,11 +2,9 @@ import { React, useState, useEffect } from "react";
 import GeoapifyAPI from "./utils/APIs/GeoapifyAPI";
 import Attraction from "./attraction";
 
-function Attractions(props) {
+function Attractions({destinationData, places, setPlaces, itinerary, setItinerary, scrollToListings}) {
 
-    const destinationData = props.destinationData;
     const [errorMessage, setErrorMessage] = useState("");
-    const {places, setPlaces, itinerary, setItinerary} = props;
 
     useEffect(() => {
         // Make sure we've got a place_id to search for
@@ -22,6 +20,11 @@ function Attractions(props) {
                     }
                     // Update places state
                     setPlaces(res.data.features);
+
+                    // Scroll to any listings when loaded
+                    if (res.data.features.length) {
+                        scrollToListings.current.scrollIntoView({ behavior: 'smooth' });
+                    }
                 })
                 .catch(err => setErrorMessage(err.message));
         }
