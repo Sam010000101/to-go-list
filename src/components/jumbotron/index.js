@@ -22,9 +22,11 @@ function Jumbotron(props) {
 
     return (
         <div id="jumbotron" className="relative top-0 w-full h-screen bg-slate-400 overflow-hidden">
-            <h1 className="absolute w-full font-itim text-[60px] text-white z-40">Where to?</h1>      
+            <div className="absolute top-36 w-full">
+                <h1 className="font-itim text-[60px] text-white text-center z-40">Where to?</h1>
+                <Form setDestination={setDestination}/>
+            </div>
             <div className="w-full h-screen bg-center bg-cover " style={{backgroundImage: `url(${backgroundImage})`}} alt="Evocative holiday scene"></div>
-            <Form setDestination={setDestination}/>
         </div>
     )
 }

@@ -39,8 +39,8 @@ function Form(props) {
     }, [setDestination]);
       
     return (
-        <div className="rounded-xl container w-full flex justify-center bg-slate-400">
-            <div id="autocomplete" className="absolute top-[90px] w-full max-w-[500px] autocomplete-container"></div>
+        <div className="w-full flex justify-center bg-slate-400">
+            <div id="autocomplete" className="absolute top-[90px] w-full max-w-[400px] autocomplete-container"></div>
         </div>
     );
 }
