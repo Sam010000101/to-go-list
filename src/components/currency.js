@@ -1,35 +1,70 @@
-import { useEffect, useState } from 'react';
-import Axios from 'axios';
+import { React, useEffect, useState } from 'react';
+import FreeCurrencyAPI from "./utils/APIs/FreeCurrencyAPI";
 import Dropdown from 'react-dropdown';
+import CurrencySelect from "./currencySelect";
 import { HiSwitchHorizontal } from 'react-icons/hi';
+import currencyData from '../data/currencyData.json';
+
+import currencyNames from '../data/currencyNames.json';
+import countryCurrencies from '../data/countryCurrencies.json';
 import 'react-dropdown/style.css';
 
-function Currency() {
+function Currency({destinationData}) {
 
 	// Initializing all the state variables
 	const [info, setInfo] = useState([]);
 	const [input, setInput] = useState(0);
 	const [from, setFrom] = useState("usd");
-	const [to, setTo] = useState("inr");
+	const [to, setTo] = useState(destinationData.properties.country_code);
 	const [options, setOptions] = useState([]);
 	const [output, setOutput] = useState(0);
+	const [baseCurrency, setBaseCurrency] = useState("GBP");
+	const [destinationCurrency, setDestinationCurrency] = useState("GBP");
 
-	// Calling the api whenever the dependency changes
 	useEffect(() => {
-		Axios.get(
-			`https://cdn.jsdelivr.net/gh/fawazahmed0/currency-api@1/latest/currencies/${from}.json`)
-			.then((res) => {
-				setInfo(res.data[from]);
-			})
-	}, [from]);
+		console.log('baseCurrency', baseCurrency);
+	 }, [baseCurrency]);
+
+	/*  
+	// Get currency conversion - should have a conversion state and set that with this
+	useEffect(() => {
+		const countryCode = destinationData.properties.country_code;
+		const currencyCode = countryCurrencies[countryCode].toUpperCase();
+		setDestinationCurrency(currencyCode);
+
+		FreeCurrencyAPI.searchTerms(baseCurrency, currencyCode)
+			.then(res => {
+				if (res.data.length === 0) {
+					throw new Error("no results found.");
+				}
+				if (res.data.status === "error") {
+					throw new Error(res.data.message);
+				}
+				console.log("res", res);
+			})		
+    }, [destinationData]);
+ */
+
+
+
+	/* 
+	
+		Select menu
+		-----------
+		COULD just have the destination on 'To' side
+		Should have all the currencies in the From, so user can convert from whatever base currency they want.
+
+		Can we populate the select menu so the visible labels (currencyData[countryCode].name or currencyData[countryCode].plural) differ from the values (currencyData[countryCode].code)
+		When value is changed we update setFrom and SetTo just like Sam
+	*/
 
 
 	// Update whenever a user switches the currency
-	useEffect(() => {
-		setOptions(Object.keys(info));
-		var rate = info[to];
-		setOutput(input * rate);
-	}, [info, input, to]);
+	// useEffect(() => {
+	// 	setOptions(Object.keys(info));
+	// 	var rate = info[to];
+	// 	setOutput(input * rate);
+	// }, [info, input, to]);
 
 	// Function to switch between two currency
 	function flip() {
@@ -41,41 +76,16 @@ function Currency() {
 	return (
 		<div className="container mx-auto h-auto rounded-xl" id="currency">
 
-			{/* code for the heading box */}
+			{/* Heading */}
 			<span className="pt-3 gap-2 flex justify-center mx-1 mt-2  bg-[#025] rounded-t-xl rounded-b h-12">
 				<span className="font-itim relative text-blue-200 font-bold leading-6">Currency Converter</span>
 			</span>
 
+			{/* Base currency */}
 			<div className="container py-2">
-				<div className="flex justify-left gap-2 ml-2">
-					<h3 className="text-black ">Amount</h3>
-					<input type="text"
-						placeholder="Enter the amount"
-						onChange={(e) => setInput(e.target.value)} />
-				</div>
-				<div className="flex justify-center gap-4 py-2 text-black">
-					<div className="middle flex">
-						<h3 className='mr-2'>From</h3>
-						<Dropdown options={options}
-							onChange={(e) => { setFrom(e.value) }}
-							value={from} placeholder="From" />
-					</div>
-					<div className="switch">
-						<HiSwitchHorizontal size="30px"
-							onClick={() => { flip() }} />
-					</div>
-					<div className="right flex">
-						<h3 className='mr-2'>To</h3>
-						<Dropdown options={options}
-							onChange={(e) => { setTo(e.value) }}
-							value={to} placeholder="To" />
-					</div>
-				</div>
-				<div className="result flex justify-center text-black pt-2">
-					<h2 className="pl-2">Converted Amount:</h2>
-					<p className="pl-2"><b>{input + " " + from + " = " + output.toFixed(2) + " " + to}</b></p>
-
-				</div>
+				{/* Could pass setFrom/setTo as callback prop to 2 versions of this component*/}
+				<CurrencySelect currencyNames={currencyNames} menuCurrency={baseCurrency} setMenuCurrency={setBaseCurrency} />
+				<CurrencySelect currencyNames={currencyNames} menuCurrency={destinationCurrency} setMenuCurrency={setDestinationCurrency} />
 			</div>
 		</div>
 	);

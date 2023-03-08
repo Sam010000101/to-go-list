@@ -11,8 +11,7 @@ import Attractions from "./components/attractions";
 import Subsection from "./components/subsection";
 
 function App() {
-  
-  const initialState = {properties: {name: "polynesia"}};
+  const initialState = {properties: {name: "polynesia", country_code: "nz"}};
   const [destinationData, setDestinationData] = useState(initialState);
   const [backgoundImage, setBackgoundImage] = useState("");
   const [places, setPlaces] = useState([]);
