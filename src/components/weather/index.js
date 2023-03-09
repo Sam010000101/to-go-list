@@ -10,9 +10,8 @@ ChartJS.register(
     CategoryScale, LinearScale, PointElement, LineElement, Title, Tooltip, Legend
 );
 
-function Weather(props) {
-
-    const { destinationData } = props;
+function Weather({ destinationData }) {
+    
     const [chartOptions, setchartOptions] = useState({
         responsive: true,
         maintainAspectRatio: false,

@@ -2,9 +2,8 @@ import React from "react";
 import { Menu } from "@headlessui/react";
 import uniqid from 'uniqid';
 
-function DayDropdown(props) {
+function DayDropdown({place, places, setPlaces, itinerary, setItinerary}) {
 
-  const {place, places, setPlaces, itinerary, setItinerary} = props;
   const {formatted, place_id} = place;
   const days = [];
   

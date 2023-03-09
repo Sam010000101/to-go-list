@@ -1,91 +1,172 @@
-import { useEffect, useState } from 'react';
-import Axios from 'axios';
-import Dropdown from 'react-dropdown';
-import { HiSwitchHorizontal } from 'react-icons/hi';
+import { React, useEffect, useState } from 'react';
+import CurrencyAPI from "./utils/APIs/CurrencyAPI";
+import CurrencySelect from "./currencySelect";
+import countryCurrencies from '../data/countryCurrencies.json';
 import 'react-dropdown/style.css';
 
-function Currency() {
+function Currency({ destinationData }) {
 
-	// Initializing all the state variables
-	const [info, setInfo] = useState([]);
-	const [input, setInput] = useState(0);
-	const [from, setFrom] = useState("usd");
-	const [to, setTo] = useState("inr");
-	const [options, setOptions] = useState([]);
-	const [output, setOutput] = useState(0);
+	const [currencyNames, setCurrencyNames] = useState(null);	
+	const [baseCurrency, setBaseCurrency] = useState("GBP British pounds");
+	const [destinationCurrency, setDestinationCurrency] = useState(null);
+	const [baseValue, setBaseValue] = useState(1);
+	const [destinationValue, setDestinationValue] = useState(1);
 
-	// Calling the api whenever the dependency changes
+	useEffect(() => {		
+		function filterCurrencyNames(names) {
+			const unwanted = [
+				"ada",
+				"amp",
+				"ar",
+				"axs",
+				"bat",
+				"bch",
+				"bnb",
+				"bsv",
+				"bsw",
+				"btc",
+				"btg",
+				"cvx",
+				"dcr",
+				"dfi",
+				"dot",
+				"enj",
+				"eos",
+				"eth",
+				"fei",
+				"fil",
+				"ftm",
+				"ftt",
+				"ggp",
+				"gno",
+				"grt",
+				"hnt",
+				"hot",
+				"icp",
+				"imp",
+				"inj",
+				"kcs",
+				"knc",
+				"ksm",
+				"leo",
+				"lrc",
+				"ltc",
+				"mkr",
+				"neo",
+				"okb",
+				"one",
+				"qnt",
+				"sle",
+				"std",
+				"stx",
+				"trx",
+				"ttt",
+				"uni",
+				"ves",
+				"vet",
+				"xag",
+				"xau",
+				"xdc",
+				"xdr",
+				"xec",
+				"xem",
+				"xlm",
+				"xmr",
+				"xrp",
+				"xtz",
+				"zec",
+				"zil"
+
+			];
+			
+			const filteredNames = {};
+			for (let key in names) {
+				if (names.hasOwnProperty(key)) {
+				   if (key.length === 3 && !unwanted.includes(key)){
+					filteredNames[key] = names[key];
+				   }
+				}
+			 }
+			 
+			return filteredNames;
+		}
+
+		CurrencyAPI.getCurrencies()
+			.then(res => {
+				if (res.data.length === 0) {
+					throw new Error("no results found.");
+				}
+				if (res.data.status === "error") {
+					throw new Error(res.data.message);
+				}
+				const filteredNames = filterCurrencyNames(res.data);
+				setCurrencyNames(filteredNames);
+				const destCurrCode = countryCurrencies[destinationData.properties.country_code];
+				setDestinationCurrency(`${destCurrCode.toUpperCase()} ${filteredNames[destCurrCode]}`);
+			});
+	}, []);
+
+	function getCode(str) {
+		return str.slice(0,3).toLowerCase();
+	}
+
+    function updateCurrency(from, to, amount, callback) {
+		if (currencyNames) {
+			// Get the latest exchange rate
+			const toCode = getCode(to);
+			CurrencyAPI.searchTerms(getCode(from), toCode)
+				.then(res => {
+					if (res.data.length === 0) {
+						throw new Error("no results found.");
+					}
+					if (res.data.status === "error") {
+						throw new Error(res.data.message);
+					}
+					const rate = res.data[toCode];
+
+					// Perform the calculation and pass to callback
+					callback((amount * rate).toFixed(2));
+				});
+		}
+	}
+
 	useEffect(() => {
-		Axios.get(
-			`https://cdn.jsdelivr.net/gh/fawazahmed0/currency-api@1/latest/currencies/${from}.json`)
-			.then((res) => {
-				setInfo(res.data[from]);
-			})
-	}, [from]);
-
-
-// Calling the convert function whenever
-// a user switches the currency
-useEffect(() => {
-	setOptions(Object.keys(info));
-	convert();
-}, [info])
+		if (destinationCurrency) {
+			updateCurrency(baseCurrency, destinationCurrency, baseValue, setDestinationValue);
+		}
+		// eslint-disable-next-line react-hooks/exhaustive-deps
+	}, [baseCurrency, destinationCurrency, currencyNames]);
 	
-// Function to convert the currency
-function convert() {
-	var rate = info[to];
-	setOutput(input * rate);
-}
+	useEffect(() => {
+		if (currencyNames) {
+			const destCurrCode = countryCurrencies[destinationData.properties.country_code];
+			setDestinationCurrency(`${destCurrCode.toUpperCase()} ${currencyNames[destCurrCode]}`);
+			updateCurrency(baseCurrency, destinationCurrency, baseValue, setDestinationValue);
+		}
+		// eslint-disable-next-line react-hooks/exhaustive-deps
+	}, [destinationData]);
 
-// Function to switch between two currency
-function flip() {
-	var temp = from;
-	setFrom(to);
-	setTo(temp);
-}
+	return (
+		<div className="container mx-auto h-auto rounded-xl" id="currency">
 
-return (
-	<div className="container mx-auto h-auto rounded-xl" id="currency">
-
-	{/* code for the heading box */}
-	<span className="pt-3 gap-2 flex justify-center mx-1 mt-2  bg-[#025] rounded-t-xl rounded-b h-12">
-		<span className="font-itim relative text-blue-200 font-bold leading-6">Currency Converter</span>
-	</span>
-
-	<div className="container py-2">
-		<div className="flex justify-left gap-2 ml-2">
-		<h3 className="text-black ">Amount</h3>
-		<input type="text"
-			placeholder="Enter the amount"
-			onChange={(e) => setInput(e.target.value)} />
+			{/* Heading */}
+			<span className="pt-3 gap-2 flex justify-center mx-1 mt-2  bg-[#025] rounded-t-xl rounded-b h-12">
+				<span className="font-itim relative text-blue-200 font-bold leading-6">Currency Converter</span>
+			</span>
+			<div className="container py-2">
+				<input value={baseValue} onChange={(e) => {
+					setBaseValue(e.target.value);
+					updateCurrency(baseCurrency, destinationCurrency, e.target.value, setDestinationValue);
+				}} />
+				<CurrencySelect zi={10} currencyNames={currencyNames} menuCurrency={baseCurrency} setMenuCurrency={setBaseCurrency} />
+				<input value={destinationValue} onChange={(e) => {
+					setDestinationValue(e.target.value);
+					updateCurrency(destinationCurrency, baseCurrency, e.target.value, setBaseValue);
+				}} />
+				<CurrencySelect  zi={0} currencyNames={currencyNames} menuCurrency={destinationCurrency} setMenuCurrency={setDestinationCurrency} />
+			</div>
 		</div>
-        <div className="flex justify-center gap-4 py-2 text-black">
-		<div className="middle flex">
-		<h3 className='mr-2'>From</h3>
-		<Dropdown options={options}
-					onChange={(e) => { setFrom(e.value) }}
-		value={from} placeholder="From" />
-		</div>
-		<div className="switch">
-		<HiSwitchHorizontal size="30px"
-						onClick={() => { flip()}}/>
-		</div>
-        <div className="right flex">
-		<h3 className='mr-2'>To</h3>
-		<Dropdown options={options}
-					onChange={(e) => {setTo(e.value)}}
-		value={to} placeholder="To" />
-		</div>
-		<button className="rounded-full bg-[#025] px-2 font-itim hover:text-yellow-300 hover:underline decoration-wavy decoration-3 text-blue-200" onClick={()=>{convert()}}>Convert</button>
-	</div>
-	<div className="result flex justify-center text-black pt-2">
-		<h2 className="pl-2">Converted Amount:</h2>
-		<p className="pl-2"><b>{input+" "+from+" = "+output.toFixed(2) + " " + to}</b></p>
-
-	</div>
-	</div>
-            </div>
-);
+	);
 }
 
 export default Currency;

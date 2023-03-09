@@ -2,10 +2,9 @@ import {React, useEffect, useRef } from "react";
 import { GeocoderAutocomplete } from "@geoapify/geocoder-autocomplete";
 import "@geoapify/geocoder-autocomplete/styles/round-borders.css";
 
-function Form(props) {
+function Form({ setDestination }) {
 
     const API_KEY = "33b4af2cef534bd6b626019b07159028";
-    const setDestination = props.setDestination;
     const initialised = useRef(false);
 
     useEffect(() => {
@@ -39,8 +38,8 @@ function Form(props) {
     }, [setDestination]);
       
     return (
-        <div className="rounded-xl container w-full flex justify-center bg-slate-400">
-            <div id="autocomplete" className="absolute top-[90px] w-full max-w-[500px] autocomplete-container"></div>
+        <div className="w-full flex justify-center bg-slate-400">
+            <div id="autocomplete" className="absolute top-[90px] w-full max-w-[400px] autocomplete-container"></div>
         </div>
     );
 }
