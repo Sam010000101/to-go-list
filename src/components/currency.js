@@ -1,38 +1,97 @@
 import { React, useEffect, useState } from 'react';
-import FreeCurrencyAPI from "./utils/APIs/FreeCurrencyAPI";
-import Dropdown from 'react-dropdown';
+import CurrencyAPI from "./utils/APIs/CurrencyAPI";
 import CurrencySelect from "./currencySelect";
-import { HiSwitchHorizontal } from 'react-icons/hi';
-import currencyData from '../data/currencyData.json';
-
-import currencyNames from '../data/currencyNames.json';
 import countryCurrencies from '../data/countryCurrencies.json';
 import 'react-dropdown/style.css';
 
-function Currency({destinationData}) {
+function Currency({ destinationData }) {
 
-	// Initializing all the state variables
-	const [info, setInfo] = useState([]);
-	const [input, setInput] = useState(0);
-	const [from, setFrom] = useState("usd");
-	const [to, setTo] = useState(destinationData.properties.country_code);
-	const [options, setOptions] = useState([]);
-	const [output, setOutput] = useState(0);
-	const [baseCurrency, setBaseCurrency] = useState("GBP");
-	const [destinationCurrency, setDestinationCurrency] = useState("GBP");
+	const [currencyNames, setCurrencyNames] = useState(null);	
+	const [baseCurrency, setBaseCurrency] = useState("GBP British pounds");
+	const [destinationCurrency, setDestinationCurrency] = useState(null);
+	const [baseValue, setBaseValue] = useState(1);
+	const [destinationValue, setDestinationValue] = useState(1);
 
-	useEffect(() => {
-		console.log('baseCurrency', baseCurrency);
-	 }, [baseCurrency]);
+	useEffect(() => {		
+		function filterCurrencyNames(names) {
+			const unwanted = [
+				"ada",
+				"amp",
+				"ar",
+				"axs",
+				"bat",
+				"bch",
+				"bnb",
+				"bsv",
+				"bsw",
+				"btc",
+				"btg",
+				"cvx",
+				"dcr",
+				"dfi",
+				"dot",
+				"enj",
+				"eos",
+				"eth",
+				"fei",
+				"fil",
+				"ftm",
+				"ftt",
+				"ggp",
+				"gno",
+				"grt",
+				"hnt",
+				"hot",
+				"icp",
+				"imp",
+				"inj",
+				"kcs",
+				"knc",
+				"ksm",
+				"leo",
+				"lrc",
+				"ltc",
+				"mkr",
+				"neo",
+				"okb",
+				"one",
+				"qnt",
+				"sle",
+				"std",
+				"stx",
+				"trx",
+				"ttt",
+				"uni",
+				"ves",
+				"vet",
+				"xag",
+				"xau",
+				"xdc",
+				"xdr",
+				"xec",
+				"xem",
+				"xlm",
+				"xmr",
+				"xrp",
+				"xtz",
+				"zec",
+				"zil"
 
-	/*  
-	// Get currency conversion - should have a conversion state and set that with this
-	useEffect(() => {
-		const countryCode = destinationData.properties.country_code;
-		const currencyCode = countryCurrencies[countryCode].toUpperCase();
-		setDestinationCurrency(currencyCode);
+			];
+			
+			const filteredNames = {};
+			for (let key in names) {
+				if (names.hasOwnProperty(key)) {
+				   if (key.length === 3 && !unwanted.includes(key)){
+					filteredNames[key] = names[key];
+				   }
+				}
+			 }
+			 
+			return filteredNames;
+		}
 
-		FreeCurrencyAPI.searchTerms(baseCurrency, currencyCode)
+		CurrencyAPI.getCurrencies()
 			.then(res => {
 				if (res.data.length === 0) {
 					throw new Error("no results found.");
@@ -40,38 +99,52 @@ function Currency({destinationData}) {
 				if (res.data.status === "error") {
 					throw new Error(res.data.message);
 				}
-				console.log("res", res);
-			})		
-    }, [destinationData]);
- */
+				const filteredNames = filterCurrencyNames(res.data);
+				setCurrencyNames(filteredNames);
+				const destCurrCode = countryCurrencies[destinationData.properties.country_code];
+				setDestinationCurrency(`${destCurrCode.toUpperCase()} ${filteredNames[destCurrCode]}`);
+			});
+	}, []);
 
-
-
-	/* 
-	
-		Select menu
-		-----------
-		COULD just have the destination on 'To' side
-		Should have all the currencies in the From, so user can convert from whatever base currency they want.
-
-		Can we populate the select menu so the visible labels (currencyData[countryCode].name or currencyData[countryCode].plural) differ from the values (currencyData[countryCode].code)
-		When value is changed we update setFrom and SetTo just like Sam
-	*/
-
-
-	// Update whenever a user switches the currency
-	// useEffect(() => {
-	// 	setOptions(Object.keys(info));
-	// 	var rate = info[to];
-	// 	setOutput(input * rate);
-	// }, [info, input, to]);
-
-	// Function to switch between two currency
-	function flip() {
-		var temp = from;
-		setFrom(to);
-		setTo(temp);
+	function getCode(str) {
+		return str.slice(0,3).toLowerCase();
 	}
+
+    function updateCurrency(from, to, amount, callback) {
+		if (currencyNames) {
+			// Get the latest exchange rate
+			const toCode = getCode(to);
+			CurrencyAPI.searchTerms(getCode(from), toCode)
+				.then(res => {
+					if (res.data.length === 0) {
+						throw new Error("no results found.");
+					}
+					if (res.data.status === "error") {
+						throw new Error(res.data.message);
+					}
+					const rate = res.data[toCode];
+
+					// Perform the calculation and pass to callback
+					callback((amount * rate).toFixed(2));
+				});
+		}
+	}
+
+	useEffect(() => {
+		if (destinationCurrency) {
+			updateCurrency(baseCurrency, destinationCurrency, baseValue, setDestinationValue);
+		}
+		// eslint-disable-next-line react-hooks/exhaustive-deps
+	}, [baseCurrency, destinationCurrency, currencyNames]);
+	
+	useEffect(() => {
+		if (currencyNames) {
+			const destCurrCode = countryCurrencies[destinationData.properties.country_code];
+			setDestinationCurrency(`${destCurrCode.toUpperCase()} ${currencyNames[destCurrCode]}`);
+			updateCurrency(baseCurrency, destinationCurrency, baseValue, setDestinationValue);
+		}
+		// eslint-disable-next-line react-hooks/exhaustive-deps
+	}, [destinationData]);
 
 	return (
 		<div className="container mx-auto h-auto rounded-xl" id="currency">
@@ -80,12 +153,17 @@ function Currency({destinationData}) {
 			<span className="pt-3 gap-2 flex justify-center mx-1 mt-2  bg-[#025] rounded-t-xl rounded-b h-12">
 				<span className="font-itim relative text-blue-200 font-bold leading-6">Currency Converter</span>
 			</span>
-
-			{/* Base currency */}
 			<div className="container py-2">
-				{/* Could pass setFrom/setTo as callback prop to 2 versions of this component*/}
-				<CurrencySelect currencyNames={currencyNames} menuCurrency={baseCurrency} setMenuCurrency={setBaseCurrency} />
-				<CurrencySelect currencyNames={currencyNames} menuCurrency={destinationCurrency} setMenuCurrency={setDestinationCurrency} />
+				<input value={baseValue} onChange={(e) => {
+					setBaseValue(e.target.value);
+					updateCurrency(baseCurrency, destinationCurrency, e.target.value, setDestinationValue);
+				}} />
+				<CurrencySelect zi={10} currencyNames={currencyNames} menuCurrency={baseCurrency} setMenuCurrency={setBaseCurrency} />
+				<input value={destinationValue} onChange={(e) => {
+					setDestinationValue(e.target.value);
+					updateCurrency(destinationCurrency, baseCurrency, e.target.value, setBaseValue);
+				}} />
+				<CurrencySelect  zi={0} currencyNames={currencyNames} menuCurrency={destinationCurrency} setMenuCurrency={setDestinationCurrency} />
 			</div>
 		</div>
 	);
